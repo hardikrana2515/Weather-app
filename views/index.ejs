@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+    <link rel="icon" href="/frontpage/weather.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("HD-wallpaper-anime-weathering-with-you-cloud-tenki-no-ko-weathering-with-you.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  max-width: 100vb;
+  max-height: fit-content;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-direction:row;
+}
+
+button{
+  background: transparent;
+  padding: 8px 16px;
+  color: #fff;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover{
+    background: linear-gradient(45deg, #fff, #dcdcdc);
+    color: #333;
+    border-color: #dcdcdc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#city{
+    background-color: transparent;
+    box-shadow: 3px 4px 6px 2 #31872e ;
+    border-radius: 25px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: 2px solid #fff;
+}
+#city:hover{
+    background: linear-gradient(45deg, #fff, #dcdcdc);
+    color: #333;
+    border-color: #dcdcdc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+@media  screen and (min-aspect-ratio:16/9){
+     body{
+          width:100%;
+          height:auto 
+     }
+    }
+    
+@media screen and  (max-aspect-ratio:16/9)
+{
+    body{
+        width: auto;
+        height: 100%;
+    }
+
+    }
+ .card{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: hsl(235, 52%, 35%); 
+    border: none; 
+    border-radius: 8x; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    outline: none; 
+    position: relative;
+    overflow: hidden; 
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+    width: auto;
+    font-size: larger;
+ }
+ .card p{
+   
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-left: 120px;
+ }
+ .notice{
+    color: #f30505;
+    text-decoration: solid ;
+    font-size: larger;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.part{
+    background-color: transparent;
+    color: linear-gradient(to bottom, #87CEEB, #2E8B57); 
+    font-display: bold ;
+    border: 2px solid;
+    height: fit-content;
+    width:20%;
+}
+
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+    <form action="/weather" method="get" id="form">
+        <input type="text" name="city" id="city" placeholder="Your city name">
+        <button type="submit" class="enter">Get Weather</button>
+        </form>
+        <% if (err) { %>
+            <p><%= err %></p>
+        <% } else if (weather) { %>
+            <br>
+            <div class="card">
+            
+                <p class="temp">
+                    <i class="fa-solid fa-temperature-high"></i>
+                    <%= ((weather.main.temp - 32) * (5/9)).toFixed(3) %>&deg;C
+                </p>
+                
+                <p class="cloud">
+                    <i class="fa-solid fa-cloud"></i>
+                    <%= weather.weather[0].main %>
+                </p>
+                
+                <p class="wind">
+                    <i class="fa-solid fa-wind"></i>
+                    <%= weather.wind.speed %>KMPH
+                </p>
+                <p class="loc">
+                    <i class="fa-solid fa-location-dot" ></i>
+                    <%= weather.name %>, <%= weather.sys.country %>
+                </p>
+                <p class="date"><%= new Date().toLocaleString() %></p>
+                
+        </div>
+        <% } %><br>
+        <label class="notice">**</label><p class="notice">After get data for save data please  click on "Get Weather" Button. </p>
+   
+    </div>
+    <script>
+       
+        document.querySelector('#form').addEventListener("submit",async(event) => {
+    
+        let  Temp = document.querySelector(".temp").innerText;
+        let  Cloud = document.querySelector(".cloud").innerText;
+        let  Wind=document.querySelector(".wind").innerText;
+        let  Loc= document.querySelector(".loc").innerText;
+        let  date=document.querySelector(".date").innerText; 
+        let obj={
+            Temprature: Temp,
+            Clouds: Cloud,
+            Wind: Wind,
+            location:Loc,
+            Date:date
+        };
+
+        await fetch('/weather',{
+            method : "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(obj)
+        });
+       
+        });
+       
+       
+    </script>    
+</body>
+</html>

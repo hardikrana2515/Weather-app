@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="/frontpage/weather.png">
+    <style type="text/css">
+        *{
+            margin: 00;
+            padding: 00;
+            
+        }
+
+        h1{
+            text-align: center;
+
+        }
+        body{
+            justify-content: center;
+            align-items: center;
+            /* background-image: url("/public/download.jpeg");
+            background-repeat: no-repeat;
+            background-size: cover; */
+            text-align: center;
+        }
+                                               
+        button{
+              background-color: #FFD700;
+              background-image: linear-gradient(to bottom right, #FFD700, #FFA500, #FF6347);
+              justify-content: center;
+              align-items:center;
+              font-size: 100px;
+              border-radius: 35px;
+              width: 20%;
+              height: fit-content;
+              pointer-events:painted;
+              text-align: center;
+             }
+             button:hover{
+                cursor:pointer;
+             }
+             a{
+                color: #FFD700;
+                font-size: 20px;
+             }
+             p{
+                background: linear-gradient(317deg, rgba(197, 232, 120, 0.952) 0%, rgba(30, 181, 111, 0.983) 74%, rgb(131, 220, 14) 83%, rgb(255, 72, 0) 91%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                
+             }
+             .video{
+                z-index: -1;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                height: 100%;
+                width: 100%;
+
+             }
+
+    </style>
+</head>
+<body>
+    <video autoplay muted plays-inline loop class="video">
+        <source src="/public/weather.mp4" type="video/mp4">
+    </video>
+
+    <h1>Weather Web</h1><br>
+    <h3><p>Welcome Ms/Mr . This website for Daily Weather Update.</p><br><p>Here you find weather of any city,town,countryside and country.
+        For Get Weather you can click on the <a href="/weather"><b><u>⛅weather</u></b></a> Button.....</p><br>
+    </h3>
+    <br><br>
+    <a href="/weather">
+        <button type="button">⛅</button>
+    </a>
+</body>
+</html>
